@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const TodoApp = () => {
     
-    const [todo, setTodo] = useState([]);
+    const [todo, setTodo] = useState('');
     const [todos, setTodos] = useState([]);
 
     function  handleOnChange(e){
@@ -15,16 +15,23 @@ const TodoApp = () => {
         setTodo('');
     };
 
+    const handleDelete = (index) => {
+        setTodos(todos.filter((_,i)=> i!== index));
+    };
+
   return (
     <div>
-        <form>
+        <form onSubmit={handleSubmit}>
             <label>Todo Add</label><br/>
             <input type='text' value={todo} onChange={handleOnChange}/><br/>
-            <button onClick={handleSubmit}>Add</button>
+            <button type='submit'>Add</button>
         </form>
         
             <ul>
-                {todos.map((todo, index)=> <li key={index}>{todo}</li>)}
+                {todos.map((todo, index)=> 
+                <li key={index}>{todo}  
+                <button onClick={() => handleDelete(index)}>Delete</button></li>
+                )}
             </ul>
         
     </div>
