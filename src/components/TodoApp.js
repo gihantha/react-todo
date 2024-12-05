@@ -1,41 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
+import { TodoForm } from "./TodoForm";
+import { TodoList } from "./TodoList";
 
 const TodoApp = () => {
-    
-    const [todo, setTodo] = useState('');
-    const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState([]);
 
-    function  handleOnChange(e){
-        setTodo(e.target.value);
-    };
+  const addTodo = (newTodo) => {
+    setTodos([...todos, newTodo]);
+  };
 
-    function handleSubmit(e){
-        e.preventDefault();
-        setTodos([...todos, todo]);
-        setTodo('');
-    };
-
-    const handleDelete = (index) => {
-        setTodos(todos.filter((_,i)=> i!== index));
-    };
+  const handleDelete = (index) => {
+    setTodos(todos.filter((_, i) => i !== index));
+  };
 
   return (
     <div>
-        <form onSubmit={handleSubmit}>
-            <label>Todo Add</label><br/>
-            <input type='text' value={todo} onChange={handleOnChange}/><br/>
-            <button type='submit'>Add</button>
-        </form>
-        
-            <ul>
-                {todos.map((todo, index)=> 
-                <li key={index}>{todo}  
-                <button onClick={() => handleDelete(index)}>Delete</button></li>
-                )}
-            </ul>
-        
-    </div>
-  )
-}
+      <TodoForm addTodo={addTodo} />
 
-export default TodoApp
+      <TodoList handleDelete={handleDelete} todos={todos} />
+    </div>
+  );
+};
+
+export default TodoApp;
