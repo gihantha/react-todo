@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export const TodoForm = ({addTodo}) => {
+export const TodoForm = ({addTodo, inputRef}) => {
     const [todo, setTodo] = useState("");
 
     const handleOnChange = (e) => {
@@ -12,6 +12,7 @@ export const TodoForm = ({addTodo}) => {
         if(todo.trim()){
             addTodo(todo);
         setTodo("");
+        inputRef.current.focus();
         }
         
     }
@@ -20,7 +21,7 @@ export const TodoForm = ({addTodo}) => {
     <div>
          <form onSubmit={handleSubmit}>
             <label>Todo Add</label><br/>
-            <input type='text' value={todo} onChange={handleOnChange}/><br/>
+            <input type='text' value={todo} onChange={handleOnChange} ref={inputRef}/><br/>
             <button type='submit'>Add</button>
         </form>
     </div>
