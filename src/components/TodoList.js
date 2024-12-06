@@ -1,17 +1,19 @@
 import React from "react";
 
-export const TodoList = ({ todos, handleDelete }) => {
+export const TodoList = ({ todos, handleToggle, handleDelete }) => {
   return (
-    <div>
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={todo.id}>
-            <input type="checkbox" checked={todo.completed} readOnly />
-            {todo.title}
-            <button onClick={() => handleDelete(index)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {todos.map((todo) => (
+        <li key={todo.id}>
+          <input
+            type="checkbox"
+            checked={todo.completed}
+            onChange={() => handleToggle(todo.id)}
+          />
+          {todo.title}
+          <button onClick={() => handleDelete(todo.id)}>Delete</button>
+        </li>
+      ))}
+    </ul>
   );
 };
