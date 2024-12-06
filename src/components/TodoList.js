@@ -5,8 +5,9 @@ export const TodoList = ({ todos, handleDelete }) => {
     <div>
       <ul>
         {todos.map((todo, index) => (
-          <li key={index}>
-            {todo}
+          <li key={todo.id}>
+            <input type="checkbox" checked={todo.completed} readOnly />
+            {todo.title}
             <button onClick={() => handleDelete(index)}>Delete</button>
           </li>
         ))}

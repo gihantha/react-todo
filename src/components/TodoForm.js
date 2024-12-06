@@ -11,8 +11,8 @@ export const TodoForm = ({addTodo, inputRef}) => {
         e.preventDefault();
         if(todo.trim()){
             addTodo(todo);
-        setTodo("");
-        inputRef.current.focus();
+            setTodo("");
+            inputRef.current.focus();
         }
         
     }
